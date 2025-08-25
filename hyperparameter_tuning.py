@@ -14,7 +14,7 @@ import pickle #to save some files and use it later
 
 ################################################# 
 #For data loading and exploration
-df = pd.read_csv("../data/churn.csv")
+df = pd.read_csv("data/churn.csv")
 df.shape #for number of rows and columns
 df.head() #DIsplayfirst 5 rows
 df.info() #checking data types and missing values
@@ -185,9 +185,11 @@ for model_name, model in models.items():#if you run this model_name it takes the
 
 #Random forest gives the highest accuracy compared to other models with default parameters
 param_grid ={
-   'n_estimators':[100, 200, 300],
-   'max_depth':[None, 10, 20],
-   'min_samples_split':[2,5,10]
+   'n_estimators': [100, 200, 300, 500],      # number of trees
+    'max_depth': [None, 10, 20, 30],           # tree depth
+    'min_samples_split': [2, 5, 10],           # min samples for splitting
+    'min_samples_leaf': [1, 2, 4],             # min samples in leaf nodes
+    'max_features': ['auto', 'sqrt', 'log2']   # number of features considered for split
 }
 
 grid_search = GridSearchCV(
